@@ -3,20 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": ""
   },
   "keywords": [],
   "author": "Rakin Rahman",
   "license": "",
   "packageManager": "pnpm@10.28.2",
   "devDependencies": {
-    "@tsconfig/recommended": "^1.0.13",
     "@types/node": "^25.2.1",
     "prettier": "^3.8.1",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "axios": "^1.13.4",
     "cheerio": "^1.2.0",
     "dotenv": "^17.2.4",
     "node-cron": "^4.2.1",
