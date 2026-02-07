@@ -1,5 +1,6 @@
 import "dotenv/config";
 import nodemailer from "nodemailer";
+import cron from "node-cron";
 
 import { logger } from "./logger";
 import { getLatestNotice } from "./notice-scraper";
@@ -36,10 +37,12 @@ async function notify() {
 function shutdown() {
   transporter.close();
   logger.info("Transporter closed");
+  process.exit(0);
 }
 
 // Graceful shutdown
 process.on("SIGINT", shutdown);
 process.on("SIGTERM", shutdown);
 
-notify();
+// Run task every 10 minutes
+cron.schedule("* * * * *", notify);
