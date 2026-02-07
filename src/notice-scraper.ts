@@ -1,6 +1,5 @@
 import * as cheerio from "cheerio";
 
-import { logger } from "./logger";
 import { AIUB_NOTICES_URL } from "./constants";
 
 let prevHref = "";
@@ -26,7 +25,7 @@ export async function getLatestNotice() {
     // Get latest notice page
     const noticeUrl = "https://www.aiub.edu" + lastNoticeHref;
     const $noticePage = await cheerio.fromURL(noticeUrl);
-    logger.info(`Fetched ${noticeUrl}`);
+    console.log("Fetched", noticeUrl);
 
     // Get notice content
     const content =
@@ -42,7 +41,7 @@ export async function getLatestNotice() {
 
     return notice;
   } catch (error) {
-    logger.error(error);
+    console.error(error);
     return null;
   }
 }

@@ -1,6 +1,4 @@
 import { Resend } from "resend";
-
-import { logger } from "./logger";
 import { Notice } from "./notice-scraper";
 
 export async function notify(notice: Notice, env) {
@@ -14,8 +12,8 @@ export async function notify(notice: Notice, env) {
   });
 
   if (error) {
-    return logger.error({ error });
+    return console.error({ error });
   }
 
-  logger.info("Message sent to", env.EMAIL);
+  console.log("Message sent to", env.EMAIL);
 }
