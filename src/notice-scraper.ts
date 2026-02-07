@@ -28,11 +28,16 @@ export async function getLatestNotice() {
     const $noticePage = await cheerio.fromURL(noticeUrl);
     logger.info(`Fetched ${noticeUrl}`);
 
+    // Get notice content
+    const content =
+      $noticePage("div[class=question-column]").html() ??
+      "<p>Failed to fetch description.</p>";
+
     prevHref = lastNoticeHref;
 
     const notice: Notice = {
       title: title,
-      content: $noticePage.html(),
+      content: content,
     };
 
     return notice;
