@@ -45,4 +45,4 @@ process.on("SIGINT", shutdown);
 process.on("SIGTERM", shutdown);
 
 // Run task every 10 minutes
-cron.schedule("* * * * *", notify);
+cron.schedule("*/10 * * * *", notify);
