@@ -11,7 +11,9 @@ export type Notice = {
 
 export async function getLatestNotice() {
   try {
-    const $ = await cheerio.fromURL(AIUB_NOTICES_URL);
+    const res = await fetch(AIUB_NOTICES_URL);
+    const html = await res.text();
+    const $ = cheerio.load(html);
 
     const lastNoticeHref = $("a.info-link").attr("href");
 
@@ -24,7 +26,9 @@ export async function getLatestNotice() {
 
     // Get latest notice page
     const noticeUrl = "https://www.aiub.edu" + lastNoticeHref;
-    const $noticePage = await cheerio.fromURL(noticeUrl);
+    const noticeRes = await fetch(AIUB_NOTICES_URL);
+    const noticeHtml = await noticeRes.text();
+    const $noticePage = cheerio.load(noticeHtml);
     console.log("Fetched", noticeUrl);
 
     // Get notice content
