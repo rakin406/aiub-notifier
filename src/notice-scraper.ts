@@ -18,6 +18,7 @@ export async function getLatestNotice() {
     // Get latest notice page
     const noticeUrl = "https://www.aiub.edu" + lastNoticeHref;
     const $notice = await cheerio.fromURL(noticeUrl);
+    logger.info(`Fetched ${noticeUrl}`);
 
     return $notice.html();
   } catch (error) {
