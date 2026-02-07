@@ -33,11 +33,13 @@ async function notify() {
   }
 }
 
-// Graceful shutdown
-process.on("SIGTERM", () => {
+function shutdown() {
   transporter.close();
   logger.info("Transporter closed");
-  process.exit(0);
-});
+}
+
+// Graceful shutdown
+process.on("SIGINT", shutdown);
+process.on("SIGTERM", shutdown);
 
 notify();
