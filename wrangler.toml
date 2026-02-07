@@ -1,0 +1,8 @@
+"$schema" = "./node_modules/wrangler/config-schema.json"
+compatibility_flags = [ "nodejs_compat" ]
+compatibility_date = "2026-02-07"
+name = "aiub-notifier"
+main = "src/index.ts"
+
+[triggers]
+crons = [ "*/10 * * * *" ]
