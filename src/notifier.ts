@@ -8,7 +8,7 @@ export async function notify(notice: Notice, env) {
     from: "AIUB Notifier <onboarding@resend.dev>",
     to: env.EMAIL,
     subject: notice.title,
-    html: notice.content,
+    html: `<a>${notice.url}</a>`,
   });
 
   if (error) {

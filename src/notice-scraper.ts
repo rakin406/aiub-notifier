@@ -6,7 +6,7 @@ let prevHref = "";
 
 export type Notice = {
   title: string;
-  content: string;
+  url: string;
 };
 
 export async function getLatestNotice() {
@@ -26,21 +26,12 @@ export async function getLatestNotice() {
 
     // Get latest notice page
     const noticeUrl = "https://www.aiub.edu" + lastNoticeHref;
-    const noticeRes = await fetch(AIUB_NOTICES_URL);
-    const noticeHtml = await noticeRes.text();
-    const $noticePage = cheerio.load(noticeHtml);
-    console.log("Fetched", noticeUrl);
-
-    // Get notice content
-    const content =
-      $noticePage("div[class=question-column]").html() ??
-      "<p>Failed to fetch description.</p>";
 
     prevHref = lastNoticeHref;
 
     const notice: Notice = {
       title: title,
-      content: content,
+      url: noticeUrl,
     };
 
     return notice;
