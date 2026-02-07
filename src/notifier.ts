@@ -1,29 +1,21 @@
-import "dotenv/config";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 import { logger } from "./logger";
 import { Notice } from "./notice-scraper";
 
-export async function notify(notice: Notice) {
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_PASSWORD,
-    },
+export async function notify(notice: Notice, env) {
+  const resend = new Resend(env.RESEND_API_KEY);
+
+  const { error } = await resend.emails.send({
+    from: "AIUB Notifier <onboarding@resend.dev>",
+    to: env.EMAIL,
+    subject: notice.title,
+    html: notice.content,
   });
 
-  try {
-    // Send email
-    const info = await transporter.sendMail({
-      from: `"AIUB Notifier" <${process.env.GMAIL_USER}>`,
-      to: process.env.GMAIL_USER,
-      subject: notice.title,
-      html: notice.content,
-    });
-
-    logger.info(`Message sent: ${info.messageId}`);
-  } catch (error) {
-    logger.error(error);
+  if (error) {
+    return logger.error({ error });
   }
+
+  logger.info("Message sent to", env.EMAIL);
 }

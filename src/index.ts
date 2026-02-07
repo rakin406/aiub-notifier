@@ -12,6 +12,6 @@ export default {
     const notice = await getLatestNotice();
     if (!notice) return;
 
-    await notify(notice);
+    await notify(notice, env);
   },
 };
