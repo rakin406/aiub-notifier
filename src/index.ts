@@ -23,9 +23,8 @@ async function notify() {
     const info = await transporter.sendMail({
       from: `"AIUB Notifier" <${process.env.GMAIL_USER}>`,
       to: process.env.GMAIL_USER,
-      // TODO: Replace subject with notice title.
-      subject: "Hello ✔",
-      html: notice,
+      subject: notice.title,
+      html: notice.content,
     });
 
     logger.info(`Message sent: ${info.messageId}`);
