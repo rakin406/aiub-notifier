@@ -3,22 +3,25 @@ import * as cheerio from "cheerio";
 import { logger } from "./logger";
 import { AIUB_NOTICES_URL } from "./constants";
 
-// async function getPage(url: string): Promise<string | null> {
-//   try {
-//     const response = await axios.get(url);
-//     return response.data;
-//   } catch (error) {
-//     logger.error(error);
-//     return null;
-//   }
-// }
+let prevHref = "";
 
 export async function getLatestNotice() {
   try {
     const $ = await cheerio.fromURL(AIUB_NOTICES_URL);
-    const $selected = $(".date-custom.pixel-pattern.high");
-    console.log($selected.text());
+
+    const lastNoticeHref = $("a.info-link").attr("href");
+
+    if (!lastNoticeHref || lastNoticeHref === prevHref) {
+      return null;
+    }
+
+    // Get latest notice page
+    const noticeUrl = "https://www.aiub.edu" + lastNoticeHref;
+    const $notice = await cheerio.fromURL(noticeUrl);
+
+    return $notice.html();
   } catch (error) {
     logger.error(error);
+    return null;
   }
 }
