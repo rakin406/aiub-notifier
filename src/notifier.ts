@@ -1,12 +1,12 @@
 import { Resend } from "resend";
 import { Notice } from "./notice-scraper";
 
-export async function notify(notice: Notice, env) {
-  const resend = new Resend(env.RESEND_API_KEY);
+export async function notify(notice: Notice) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
   const { error } = await resend.emails.send({
     from: "AIUB Notifier <onboarding@resend.dev>",
-    to: env.EMAIL,
+    to: process.env.EMAIL!,
     subject: notice.title,
     html: `<a href="${notice.url}">${notice.url}</a>`,
   });
@@ -15,5 +15,5 @@ export async function notify(notice: Notice, env) {
     return console.error({ error });
   }
 
-  console.log("Message sent to", env.EMAIL);
+  console.log("Message sent to", process.env.EMAIL);
 }
