@@ -1,6 +1,6 @@
 import * as cheerio from "cheerio";
 
-import { AIUB_NOTICES_URL } from "./constants";
+import { AIUB_ENDPOINT, AIUB_NOTICES_URL } from "./constants";
 
 let prevHref = "";
 
@@ -25,7 +25,7 @@ export async function getLatestNotice() {
     const title = $("h2.title").first().text().trim();
 
     // Get latest notice page
-    const noticeUrl = "https://www.aiub.edu" + lastNoticeHref;
+    const noticeUrl = AIUB_ENDPOINT + lastNoticeHref;
 
     prevHref = lastNoticeHref;
 
