@@ -1,5 +1,3 @@
-import "dotenv/config";
-
 import { getLatestNotice } from "./notice-scraper";
 import { notify } from "./notifier";
 
