@@ -15,5 +15,5 @@ export async function notify(notice: Notice) {
     return console.error({ error });
   }
 
-  console.log("Message sent to", env.EMAIL);
+  console.log("Message sent to", process.env.EMAIL);
 }
