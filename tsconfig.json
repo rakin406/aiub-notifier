@@ -8,9 +8,8 @@
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "moduleResolution": "node",
-    "module": "commonjs",
+    "module": "esnext",
     "target": "esnext",
-    "lib": ["esnext"],
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     // and npm install -D @types/node
