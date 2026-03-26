@@ -1,10 +1,23 @@
+import fs from "fs";
+
+import logger from "./logger";
 import { getLatestNotice } from "./notice-scraper";
 import { notify } from "./notifier";
+import { DATA_DIR } from "./constants";
 
 (async () => {
-  // Get notice
-  const notice = await getLatestNotice();
-  if (!notice) return;
+  try {
+    await fs.mkdir(DATA_DIR, { recursive: true });
 
-  await notify(notice);
+    // Get notice
+    const notice = await getLatestNotice();
+
+    // Send notice
+    if (notice) {
+      await notify(notice);
+    }
+  } catch (error) {
+    logger.error({ error });
+    process.exitCode = 1;
+  }
 })();
