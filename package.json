@@ -8,6 +8,9 @@
     "build": "tsc",
     "start": "node ./dist/index.js"
   },
+  "bin": {
+    "aiub-notifier": "./dist/index.js"
+  },
   "keywords": [],
   "author": "Rakin Rahman",
   "license": "",
