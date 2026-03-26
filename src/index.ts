@@ -1,9 +1,11 @@
+#!/usr/bin/env node
+
 import fs from "fs";
 
-import logger from "./logger";
-import { getLatestNotice } from "./notice-scraper";
-import { notify } from "./notifier";
-import { DATA_DIR, PREV_LINK_FILE } from "./constants";
+import logger from "./logger.js";
+import { getLatestNotice } from "./notice-scraper.js";
+import { notify } from "./notifier.js";
+import { DATA_DIR, PREV_LINK_FILE } from "./constants.js";
 
 (async () => {
   try {

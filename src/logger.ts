@@ -1,6 +1,6 @@
 import pino from "pino";
 
-import { LOG_FILE } from "./constants";
+import { LOG_FILE } from "./constants.js";
 
 const logger = pino({
   transport: {
