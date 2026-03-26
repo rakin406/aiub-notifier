@@ -11,18 +11,28 @@ import { DATA_DIR, PREV_LINK_FILE } from "./constants";
 
     // Get notice
     const notice = await getLatestNotice();
-    let prevNotice = null;
+    let prevNoticeUrl = null;
 
     // Get previous notice URL if it exists
     fs.readFile(PREV_LINK_FILE, (err, data) => {
       if (!err && data) {
-        prevNotice = data;
+        prevNoticeUrl = data;
       }
     });
 
     // Send new notice
-    if (notice && notice !== prevNotice) {
+    if (notice && notice.url !== prevNoticeUrl) {
       await notify(notice);
+
+      // Save notice
+      fs.writeFile(PREV_LINK_FILE, notice.url, (err) => {
+        if (err) {
+          logger.error({ err });
+          process.exitCode = 2;
+          return;
+        }
+        logger.info(`Notice URL saved to ${PREV_LINK_FILE}`);
+      });
     }
   } catch (error) {
     logger.error({ error });
