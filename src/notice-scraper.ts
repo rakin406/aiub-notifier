@@ -1,13 +1,9 @@
 import * as cheerio from "cheerio";
 
+import Notice from "./notice";
 import { AIUB_ENDPOINT, AIUB_NOTICES_URL } from "./constants";
 
 let prevHref = "";
-
-export type Notice = {
-  title: string;
-  url: string;
-};
 
 export async function getLatestNotice() {
   try {

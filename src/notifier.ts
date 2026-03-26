@@ -1,6 +1,6 @@
 import { Resend } from "resend";
-import { Notice } from "./notice-scraper";
 
+import Notice from "./notice";
 import logger from "./logger";
 
 export async function notify(notice: Notice) {
