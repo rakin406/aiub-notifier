@@ -3,7 +3,7 @@ import fs from "fs";
 import logger from "./logger";
 import { getLatestNotice } from "./notice-scraper";
 import { notify } from "./notifier";
-import { DATA_DIR } from "./constants";
+import { DATA_DIR, PREV_LINK_FILE } from "./constants";
 
 (async () => {
   try {
@@ -11,9 +11,17 @@ import { DATA_DIR } from "./constants";
 
     // Get notice
     const notice = await getLatestNotice();
+    let prevNotice = null;
 
-    // Send notice
-    if (notice) {
+    // Get previous notice URL if it exists
+    fs.readFile(PREV_LINK_FILE, (err, data) => {
+      if (!err && data) {
+        prevNotice = data;
+      }
+    });
+
+    // Send new notice
+    if (notice && notice !== prevNotice) {
       await notify(notice);
     }
   } catch (error) {
