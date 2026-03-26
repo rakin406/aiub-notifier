@@ -11,12 +11,12 @@ import { DATA_DIR, PREV_LINK_FILE } from "./constants";
 
     // Get notice
     const notice = await getLatestNotice();
-    let prevNoticeUrl = null;
+    let prevNoticeUrl: string | null = null;
 
     // Get previous notice URL if it exists
-    fs.readFile(PREV_LINK_FILE, "utf-8", (err, data) => {
+    fs.readFile(PREV_LINK_FILE, (err, data) => {
       if (!err) {
-        prevNoticeUrl = data;
+        prevNoticeUrl = data.toString();
       }
     });
 
