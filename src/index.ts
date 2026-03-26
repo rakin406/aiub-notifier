@@ -7,7 +7,7 @@ import { DATA_DIR, PREV_LINK_FILE } from "./constants";
 
 (async () => {
   try {
-    await fs.mkdir(DATA_DIR, { recursive: true });
+    fs.mkdirSync(DATA_DIR, { recursive: true });
 
     // Get notice
     const notice = await getLatestNotice();
