@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 
-import Notice from "./notice";
-import logger from "./logger";
+import Notice from "./notice.js";
+import logger from "./logger.js";
 
 export async function notify(notice: Notice) {
   const resend = new Resend(process.env.RESEND_API_KEY);

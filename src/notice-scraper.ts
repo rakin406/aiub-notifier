@@ -1,8 +1,8 @@
 import * as cheerio from "cheerio";
 
-import Notice from "./notice";
-import logger from "./logger";
-import { AIUB_ENDPOINT, AIUB_NOTICES_URL } from "./constants";
+import Notice from "./notice.js";
+import logger from "./logger.js";
+import { AIUB_ENDPOINT, AIUB_NOTICES_URL } from "./constants.js";
 
 export async function getLatestNotice() {
   try {
