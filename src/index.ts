@@ -14,8 +14,8 @@ import { DATA_DIR, PREV_LINK_FILE } from "./constants";
     let prevNoticeUrl = null;
 
     // Get previous notice URL if it exists
-    fs.readFile(PREV_LINK_FILE, (err, data) => {
-      if (!err && data) {
+    fs.readFile(PREV_LINK_FILE, "utf-8", (err, data) => {
+      if (!err) {
         prevNoticeUrl = data;
       }
     });
