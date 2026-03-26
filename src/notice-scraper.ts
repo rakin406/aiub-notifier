@@ -1,9 +1,8 @@
 import * as cheerio from "cheerio";
 
 import Notice from "./notice";
+import logger from "./logger";
 import { AIUB_ENDPOINT, AIUB_NOTICES_URL } from "./constants";
-
-let prevHref = "";
 
 export async function getLatestNotice() {
   try {
@@ -13,7 +12,8 @@ export async function getLatestNotice() {
 
     const lastNoticeHref = $("a.info-link").attr("href");
 
-    if (!lastNoticeHref || lastNoticeHref === prevHref) {
+    if (!lastNoticeHref) {
+      logger.error("Could not find the latest notice");
       return null;
     }
 
@@ -23,8 +23,6 @@ export async function getLatestNotice() {
     // Get latest notice page
     const noticeUrl = AIUB_ENDPOINT + lastNoticeHref;
 
-    prevHref = lastNoticeHref;
-
     const notice: Notice = {
       title: title,
       url: noticeUrl,
@@ -32,7 +30,7 @@ export async function getLatestNotice() {
 
     return notice;
   } catch (error) {
-    console.error(error);
+    logger.error({ error });
     return null;
   }
 }
