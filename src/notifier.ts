@@ -1,5 +1,7 @@
 import { Resend } from "resend";
-import { Notice } from "./notice-scraper";
+
+import Notice from "./notice";
+import logger from "./logger";
 
 export async function notify(notice: Notice) {
   const resend = new Resend(process.env.RESEND_API_KEY);
@@ -12,8 +14,8 @@ export async function notify(notice: Notice) {
   });
 
   if (error) {
-    return console.error({ error });
+    return logger.error({ error });
   }
 
-  console.log("Message sent to", process.env.EMAIL);
+  logger.info(`Message sent to ${process.env.EMAIL}`);
 }
