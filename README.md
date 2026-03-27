@@ -28,6 +28,11 @@ needed for this program to run. Refer to `.env.example`.
 On Linux, you need a [cron](https://en.wikipedia.org/wiki/Cron) implementation installed.
 Enable the service provided by the installed package. For example, *cronie* uses `cronie.service`.
 
+First of all, get the path to the program:
+```bash
+which aiub-notifier
+```
+
 Edit your crontab:
 ```bash
 crontab -e
@@ -35,7 +40,7 @@ crontab -e
 
 Paste this:
 ```
-*/10 * * * * RESEND_API_KEY=your-resend-api-key EMAIL=your-email-account aiub-notifier >/dev/null 2>&1
+*/10 * * * * RESEND_API_KEY=your-resend-api-key EMAIL=your-email-account <path-to-aiub-notifier> >/dev/null 2>&1
 ```
 
 `*/10 * * * *` is a cron schedule expressing "at every 10th minute". That means
