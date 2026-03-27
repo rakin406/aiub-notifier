@@ -59,6 +59,8 @@ To view your crontabs:
 crontab -l
 ```
 
+Logs are saved to `~/.local/share/aiub-notifier/logs`.
+
 ## Contributing
 
 Contributions, bug reports, and feature requests are welcome! Feel free to open an issue or submit a pull request on GitHub.
